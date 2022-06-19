@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container">
+    <div class="Container">
         <div class="page-header">
             <h1>{{ titulo }}</h1> 
         </div>
@@ -24,7 +24,7 @@
             <tr>
                 <td> {{jogo.nome}} </td>
                 <td> {{jogo.categoria}}</td>
-                <td> {{jogo.console}}</td>
+                <td> {{jogo.console[0]}}</td>
             </tr>
             {% endfor %}
         </tbody>
