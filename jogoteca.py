@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect 
 
 #iniciando app em flask
 app = Flask(__name__)
@@ -11,11 +11,10 @@ class Jogo:
         self.categoria = categoria
         self.console = console,
 
-
+lista = [Jogo('Tetris', 'Puzzle','Arcade'), Jogo('God of War', 'Hack and Slash', 'PS2'), Jogo('Pokemon Ruby', 'Adventure', 'GameBoy Advance')]
 
 @app.route('/')
 def ola():
-    lista = [Jogo('Tetris', 'Puzzle','Arcade'), Jogo('God of War', 'Hack and Slash', 'PS2'), Jogo('Pokemon Ruby', 'Adventure', 'GameBoy Advance')]
     print(lista[1].console)
     return render_template('lista.html', titulo='Jogos', jogos=lista)
 
@@ -29,9 +28,8 @@ def criar():
     categoria = request.form['categoria']
     console = request.form['console']
     novo_jogo = Jogo(nome, categoria, console)
-    lista = []
     lista.append(novo_jogo)
-    return render_template('lista.html', titulo='Jogos', jogos=lista)
+    return redirect('/')
 #Recebe parametros host="0.0.0.0" e port=5000
 app.run(debug=True)
 
