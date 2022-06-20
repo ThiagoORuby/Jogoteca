@@ -1,0 +1,8 @@
+{% extends "template.html" %}
+{% block conteudo %}
+    <form action="/autenticar" method="POST">
+        <p><label> Usuário: </label><input type="text" name="usuario" id="usuario" class="form-control" required></p>
+        <p><label> Senha: </label><input type="password"  name="senha" id="senha" class="form-control" required></p>
+        <button type="submit" class="btn btn-primary">Entrar</button>
+    </form>
+{% endblock %}

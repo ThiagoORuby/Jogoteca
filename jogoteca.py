@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, redirect 
+from flask import Flask, render_template, request, redirect, session, flash
 
 #iniciando app em flask
 app = Flask(__name__)
-
+app.secret_key = 'pytorch'
 
 class Jogo:
 
@@ -19,6 +19,7 @@ def ola():
     return render_template('lista.html', titulo='Jogos', jogos=lista)
 
 @app.route('/novo')
+
 def novo():
     return render_template('novo.html', titulo='Adicionar novo')
 
@@ -30,6 +31,24 @@ def criar():
     novo_jogo = Jogo(nome, categoria, console)
     lista.append(novo_jogo)
     return redirect('/')
+
+#Rota de login
+@app.route('/login')
+def login():
+    return render_template('login.html', titulo='Faça seu login')
+
+#Rota de autenticação
+@app.route('/autenticar', methods=['POST',])
+def autenticar():
+    senha = request.form['senha']
+    if senha=='familhao':
+        session['usuario_logado'] = request.form['usuario']
+        flash(session['usuario_logado'] + ' logado com sucesso')
+        return redirect('/')
+    else:
+        flash('Usuario não logado')
+        return redirect('/login')
+
 #Recebe parametros host="0.0.0.0" e port=5000
 app.run(debug=True)
 
